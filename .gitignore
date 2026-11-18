@@ -1,0 +1,35 @@
+# Secrets and credentials - never commit
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*credentials*.json
+.npmrc
+.pypirc
+
+# Sensitive corporate records (founder-managed, local only)
+company/private/*
+!company/private/README.md
+
+# Audit logs may contain sensitive command text
+logs/
+
+# Local Claude Code overrides
+.claude/settings.local.json
+
+# OS / tooling noise
+.DS_Store
+__pycache__/
+*.pyc
+
+# Agents' private working notes (AI-generated, local only)
+company/agent-notes/*
+!company/agent-notes/README.md
+
+# Files attached in app chats (local only; may hold sensitive documents)
+company/uploads/*
+!company/uploads/README.md
+
+# Setup wizard backups
+*.bak

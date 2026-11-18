@@ -1,0 +1,18 @@
+---
+title: Products and services
+layer: authoritative-facts
+owner: founder
+verified_on: 
+verified_by: 
+source: 
+status: UNVERIFIED
+---
+
+> Authoritative layer. Only founder-confirmed facts belong here, each with a source and `verified_on`. Agents may propose edits but the guard hook asks before any write. Sensitive identifiers (PAN, Aadhaar, bank details) never go here; put them in `company/private/` or reference the source system.
+> Fields marked `TBD` are unknown. Do not treat them as known.
+
+## Product register
+| Product / service | Status | Description | Owner | Repo / system pointers (see records/sources.md) | Source | Verified on |
+|---|---|---|---|---|---|---|
+| (your first product) | TBD | Details TBD | founder | TBD |  |  |
+| Future products / services | Not yet defined | | | | | |

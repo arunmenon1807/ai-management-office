@@ -1,0 +1,23 @@
+---
+title: Financial assumptions
+layer: authoritative-facts
+owner: founder
+verified_on: 
+verified_by: 
+source: 
+status: UNVERIFIED
+---
+
+> Authoritative layer. Only founder-confirmed facts belong here, each with a source and `verified_on`. Agents may propose edits but the guard hook asks before any write. Sensitive identifiers (PAN, Aadhaar, bank details) never go here; put them in `company/private/` or reference the source system.
+> Fields marked `TBD` are unknown. Do not treat them as known.
+
+## Assumptions (all TBD until the founder supplies and confirms)
+| Assumption | Value | Currency / period | Source | Verified on |
+|---|---|---|---|---|
+| Cash on hand | TBD | {{currency}} | Bank / accounting system (do not paste account numbers) | |
+| Monthly burn | TBD | {{currency}} / month | | |
+| Monthly recurring revenue | TBD | {{currency}} / month | | |
+| Financial year | {{fiscal_year}} | | {{fiscal_source}} | {{fiscal_verified}} |
+| Minimum runway threshold | TBD | months | Founder | |
+| Single-spend approval limit | TBD | {{currency}} | Founder | |
+| Tax registration status (GST etc.) | TBD | | | |

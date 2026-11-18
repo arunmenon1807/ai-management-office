@@ -1,0 +1,23 @@
+---
+title: Technical architecture
+layer: authoritative-facts
+owner: founder
+verified_on: 
+verified_by: 
+source: 
+status: UNVERIFIED
+---
+
+> Authoritative layer. Only founder-confirmed facts belong here, each with a source and `verified_on`. Agents may propose edits but the guard hook asks before any write. Sensitive identifiers (PAN, Aadhaar, bank details) never go here; put them in `company/private/` or reference the source system.
+> Fields marked `TBD` are unknown. Do not treat them as known.
+
+## Systems
+| Component | Technology | Hosting | Repo | Data stores | Source | Verified on |
+|---|---|---|---|---|---|---|
+| (your first product) | TBD | TBD | TBD | TBD | | |
+
+## Third-party services and AI providers
+TBD. Record provider, purpose, billing owner, and where usage is visible. No keys or secrets here.
+
+## Environments and release process
+TBD

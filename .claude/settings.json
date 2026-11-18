@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "defaultMode": "default",
+    "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh repo view:*)",
+      "Bash(python3 scripts/records.py:*)",
+      "Bash(python3 tests/validate.py:*)",
+      "Edit(./records/reports/**)",
+      "Edit(./records/actions/**)",
+      "Edit(./records/risks/**)",
+      "Edit(./records/compliance/**)",
+      "Edit(./company/conclusions/**)",
+      "Edit(./company/agent-notes/**)"
+    ],
+    "ask": [
+      "Read(./company/private/**)",
+      "Edit(./company/facts/**)",
+      "Edit(./records/decisions/**)",
+      "Edit(./CLAUDE.md)",
+      "Edit(./.claude/**)",
+      "Bash(git commit:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh repo delete:*)",
+      "Bash(gh auth token:*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.config/gh/**)",
+      "Edit(./company/private/**)",
+      "Edit(./logs/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && python3 scripts/records.py status && python3 scripts/records.py stale",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

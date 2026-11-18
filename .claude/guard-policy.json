@@ -1,0 +1,67 @@
+{
+  "_comment": "Policy data for .claude/hooks/guard.py. Regexes are case-insensitive Python regexes. Changing this file is a governance change: it is itself protected by an 'ask' rule and must go through git review. Default posture: advisory and read-only.",
+
+  "internal_server_patterns": ["^ccd_", "^Claude_Browser$", "^terminal$", "^visualize$", "^easel$", "^scheduled-tasks$", "^mcp-registry$"],
+  "ask_server_patterns": ["^claude-in-chrome$", "^computer-use$"],
+
+  "mcp_read_name_pattern": "^(get|list|search|find|read|describe|whoami|status|fetch|check|count|aggregate|download|query|show|http|domain-status|environment-status)([-_]|$)",
+  "mcp_secret_name_pattern": "(credential|secret|token|_env|envs|variables|api[-_]?keys?|sdk[-_]?keys?|bypass|signing|password|access_to)",
+
+  "drive_create": {"server_pattern": "^claude_ai_Google_Drive$", "name_pattern": "^create_file$", "approval_env": "AIMO_APPROVED_DRIVE_WRITE", "app_env": "AIMO_APP_CHAT"},
+
+  "mail_draft": {"server_pattern": "^claude_ai_Gmail$", "name_pattern": "^(create_draft|update_draft)$"},
+
+  "bash_deny": [
+    {"pattern": "\\bgit\\s+push\\b", "reason": "Pushing to a remote changes a repository. Founder must push manually."},
+    {"pattern": "\\bgit\\s+(reset\\s+--hard|clean\\s+-\\w*f|checkout\\s+--\\s|branch\\s+-D|filter-branch|rebase)", "reason": "Destructive or history-rewriting git operation."},
+    {"pattern": "\\bgh\\s+(pr\\s+(create|merge|close|edit|comment|review|ready)|issue\\s+(create|edit|close|comment|delete|transfer)|repo\\s+(delete|create|edit|fork|archive|rename)|release\\s+(create|delete|edit|upload)|workflow\\s+(run|enable|disable)|secret|variable|auth\\s+(refresh|logout|token|login)|gist\\s+(create|edit|delete)|label\\s+(create|delete|edit)|ruleset|ssh-key|gpg-key|codespace)", "reason": "GitHub write or credential operation. This system uses GitHub read-only."},
+    {"pattern": "\\bgh\\s+api\\b.*(-X|--method)\\s*['\"]?(POST|PUT|PATCH|DELETE)", "reason": "GitHub API write call."},
+    {"pattern": "\\bgh\\s+api\\b.*\\s(-f|-F|--field|--raw-field|--input)\\b", "reason": "GitHub API call with a request body (write)."},
+    {"pattern": "(^|[;&|]\\s*|\\bnpx\\s+|\\bnpm\\s+exec\\s+|\\bsudo\\s+)(vercel|railway|wrangler|netlify|flyctl|fly)\\b(?!\\s+(list|ls|inspect|logs|whoami|status|help|--version|-v|--help)\\b)", "reason": "Hosting-platform CLI use other than read-only listing/inspection (a bare CLI invocation can deploy). Deployments and config changes are founder-performed."},
+    {"pattern": "\\bcurl\\b.*(-X\\s*['\"]?(POST|PUT|PATCH|DELETE)|--data|--json|\\s-d\\s|\\s-F\\s|--form|--upload-file|\\s-T\\s)", "reason": "Outbound HTTP write (possible external communication or data exfiltration)."},
+    {"pattern": "\\bwget\\b.*(--post|--method)", "reason": "Outbound HTTP write."},
+    {"pattern": "\\b(sendmail|mutt|msmtp|swaks|mailx?)\\b", "reason": "Sending email is an external communication. Drafts only."},
+    {"pattern": "\\bosascript\\b.*(Mail|Messages|System Events)", "reason": "Scripting mail/messaging apps is an external communication."},
+    {"pattern": "\\brm\\s+-\\w*[rf]", "reason": "Recursive or forced delete. Official documents are never deleted by agents."},
+    {"pattern": "\\bsudo\\b", "reason": "Privilege escalation is not permitted."},
+    {"pattern": "\\b(ssh|scp|sftp|rsync|nc|ncat|telnet)\\b", "reason": "Remote access / transfer tools are not permitted."},
+    {"pattern": "\\b(cat|less|more|head|tail|grep|rg|awk|sed|open|cp|mv|base64|xxd|strings|printenv)\\b[^|;&]*(\\.env\\b|\\.env\\.|id_rsa|id_ed25519|\\.aws/|\\.ssh/|\\.netrc|\\.npmrc|\\.pypirc|credentials\\.json|\\.config/gh)", "reason": "Reading credential files is not permitted."},
+    {"pattern": "\\b(printenv|env)\\b\\s*($|\\||;)", "reason": "Dumping environment variables may expose secrets."},
+    {"pattern": "\\bsecurity\\s+(find|dump|export)-", "reason": "Keychain access is not permitted."},
+    {"pattern": "\\bcompany/private\\b", "reason": "company/private holds sensitive records; agents do not touch it through the shell."}
+  ],
+
+  "bash_ask": [
+    {"pattern": "\\bgit\\s+(commit|merge|tag|stash|restore|checkout|switch|add)\\b", "reason": "Repository change in this repo. Confirm with the founder."},
+    {"pattern": "\\b(pip3?|npm|pnpm|yarn|brew|uv|cargo|gem)\\s+(install|add|i|remove|uninstall|update|upgrade)\\b", "reason": "Installing software is a supply-chain change."},
+    {"pattern": "(>|>>|\\btee\\b|\\bsed\\s+-i|\\bmv\\b|\\bcp\\b|\\btruncate\\b)[^|;&]*(company/facts|records/decisions|CLAUDE\\.md|\\.claude/)", "reason": "Modifies an official/governance file via the shell. Confirm with the founder."},
+    {"pattern": "records\\.py\\s+new\\s+decision", "reason": "Recording a decision requires the founder's explicit approval."}
+  ],
+
+  "write_deny_paths": [
+    {"pattern": "^company/private/", "reason": "company/private is founder-managed. Agents never write sensitive corporate records."},
+    {"pattern": "^\\.git/", "reason": "Direct edits to .git are not permitted."},
+    {"pattern": "^logs/", "reason": "Audit logs are written only by the guard hook (tamper protection)."}
+  ],
+  "write_ask_paths": [
+    {"pattern": "^company/facts/", "reason": "Authoritative company facts. Founder must confirm every change and the source."},
+    {"pattern": "^records/decisions/", "reason": "Decision records may be written only after the founder's explicit approval."},
+    {"pattern": "^CLAUDE\\.md$", "reason": "Company operating principles."},
+    {"pattern": "^\\.claude/", "reason": "Agent, skill, hook and permission configuration is a governance change."},
+    {"pattern": "^(scripts|tests)/", "reason": "Tooling change."},
+    {"pattern": "^\\.gitignore$", "reason": "Controls what may reach Git."}
+  ],
+
+  "secret_content_patterns": [
+    {"pattern": "AKIA[0-9A-Z]{16}", "reason": "AWS access key"},
+    {"pattern": "-----BEGIN (RSA |EC |OPENSSH |DSA |PGP )?PRIVATE KEY-----", "reason": "private key"},
+    {"pattern": "\\bsk-[A-Za-z0-9_\\-]{20,}", "reason": "API key (sk-)"},
+    {"pattern": "\\bgh[pousr]_[A-Za-z0-9]{30,}", "reason": "GitHub token"},
+    {"pattern": "\\bxox[baprs]-[A-Za-z0-9\\-]{10,}", "reason": "Slack token"},
+    {"pattern": "(api[_-]?key|secret|passwd|password|token)\\s*[:=]\\s*['\"]?[A-Za-z0-9/+_\\-]{16,}", "reason": "credential assignment"},
+    {"pattern": "\\b[A-Z]{5}[0-9]{4}[A-Z]\\b", "reason": "possible Indian PAN (sensitive tax identifier)"},
+    {"pattern": "\\b[2-9]\\d{3}\\s\\d{4}\\s\\d{4}\\b", "reason": "possible Aadhaar number (sensitive identifier)"}
+  ],
+
+  "audit_skip_tools": ["Read", "Grep", "Glob", "WebSearch", "ToolSearch", "TodoWrite"]
+}
