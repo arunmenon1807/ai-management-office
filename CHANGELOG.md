@@ -7,6 +7,7 @@ All notable changes to this project are recorded here. The format follows [Keep 
 ### Added
 - Pull request template and a Code of Conduct (adapted from Contributor Covenant 2.1).
 - Community guide for GitHub Discussions (`docs/community.md`) with discussion forms for Q&A, Ideas and Show and tell.
+- Repository rulesets as JSON (`.github/rulesets/`): protect `main` and `v*` release tags.
 
 ## [0.1.0] - 2026-11-18
 
