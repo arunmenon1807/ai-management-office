@@ -7,6 +7,7 @@ All notable changes to this project are recorded here. The format follows [Keep 
 ### Added
 - Issue templates (bug report, feature request) and a security-advisory contact link.
 - This changelog.
+- Pull request template and a Code of Conduct (adapted from Contributor Covenant 2.1).
 
 ## [0.1.0] - 2026-11-18
 
