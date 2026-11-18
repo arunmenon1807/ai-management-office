@@ -5,9 +5,8 @@ All notable changes to this project are recorded here. The format follows [Keep 
 ## [Unreleased]
 
 ### Added
-- Issue templates (bug report, feature request) and a security-advisory contact link.
-- This changelog.
 - Pull request template and a Code of Conduct (adapted from Contributor Covenant 2.1).
+- Community guide for GitHub Discussions (`docs/community.md`) with discussion forms for Q&A, Ideas and Show and tell.
 
 ## [0.1.0] - 2026-11-18
 
@@ -23,6 +22,7 @@ First open-source release.
 - README with intro GIF, dashboard screenshot, run-the-UI guide and a guide to connecting Google Drive, Gmail and other connectors or plugins.
 - GitHub Actions: `tests/validate.py`, plus web type-check and tests on Node 24.
 - MIT license.
+- Issue templates (bug report, feature request) with a security-advisory contact link, and this changelog.
 
 ### Known limitations
 - Company Secretary and Chartered Accountant specialists default to Indian law; other jurisdictions need adaptation (see `docs/localising.md`).

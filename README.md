@@ -75,4 +75,4 @@ python3 scripts/init_company.py --name "Acme Co" --country India --currency INR 
 | `docs/` | Setup, operating guide, architecture, permission model |
 | `examples/` | A clearly-fictional (MOCK) decision workflow |
 
-Verified vs not verified: [docs/limitations-and-next-steps.md](docs/limitations-and-next-steps.md). Contributing: [CONTRIBUTING.md](CONTRIBUTING.md). License: MIT.
+Verified vs not verified: [docs/limitations-and-next-steps.md](docs/limitations-and-next-steps.md). Contributing: [CONTRIBUTING.md](CONTRIBUTING.md). Questions and ideas: [Discussions](docs/community.md). Changes: [CHANGELOG.md](CHANGELOG.md). License: MIT.

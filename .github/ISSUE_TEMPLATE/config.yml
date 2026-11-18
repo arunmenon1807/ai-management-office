@@ -3,3 +3,6 @@ contact_links:
   - name: Report a security issue privately
     url: https://github.com/arunmenon1807/ai-management-office/security/advisories/new
     about: For a command or tool call the guard should block but allows, or any exposure of data. Do not open a public issue.
+  - name: Ask a question or share an idea
+    url: https://github.com/arunmenon1807/ai-management-office/discussions
+    about: Questions, ideas and show-and-tell belong in Discussions (see docs/community.md).

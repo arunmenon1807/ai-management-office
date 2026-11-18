@@ -9,6 +9,9 @@ Thanks for helping. By taking part you agree to the [Code of Conduct](CODE_OF_CO
 - The pull request template lists the checks reviewers will look for.
 - Before opening a PR: `python3 tests/validate.py` (0 failures) and, for web changes, `cd apps/web && npm install && npm test && npx tsc --noEmit`.
 
+## Questions and ideas
+Use GitHub Discussions (see [docs/community.md](docs/community.md)) for questions, ideas and show-and-tell. Issues are for bugs and concrete feature requests.
+
 ## Reporting bugs and requesting features
 Use the issue templates (New issue → Bug report or Feature request). They ask for fictional examples only: never paste real company data. Record user-visible changes in `CHANGELOG.md` under **Unreleased**.
 

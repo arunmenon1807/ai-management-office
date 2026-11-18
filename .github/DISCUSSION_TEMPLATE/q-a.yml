@@ -1,0 +1,24 @@
+title: "[Q&A] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read the [community guide](https://github.com/arunmenon1807/ai-management-office/blob/main/docs/community.md). **Do not post real company data, secrets or identifiers.** Use fictional values.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you tried
+      description: Commands run, docs read, and the last lines of `python3 tests/validate.py` if relevant.
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, Python, Node and Claude Code versions.
+      render: text

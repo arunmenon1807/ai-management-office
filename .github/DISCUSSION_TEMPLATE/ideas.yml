@@ -1,0 +1,28 @@
+title: "[Idea] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The project stays advisory and read-only by default. Anything that writes (send, pay, file, deploy) must keep a human approval step. No real company data, please.
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+    validations:
+      required: true
+  - type: textarea
+    id: who
+    attributes:
+      label: Who would use it, and what does it replace?
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - Jurisdiction pack
+        - Read-only integration
+        - Agent or workflow
+        - Web app
+        - Docs
+        - Other

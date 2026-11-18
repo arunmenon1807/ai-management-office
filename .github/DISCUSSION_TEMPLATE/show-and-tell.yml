@@ -1,0 +1,21 @@
+title: "[Show] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share how you adapted the office. **Use a fictional or fully anonymised company.** No real names, figures, identifiers or screenshots of real data.
+  - type: textarea
+    id: what
+    attributes:
+      label: What did you build or change?
+    validations:
+      required: true
+  - type: textarea
+    id: how
+    attributes:
+      label: How (agents edited, connectors used, jurisdiction)
+  - type: textarea
+    id: lessons
+    attributes:
+      label: What worked and what did not
