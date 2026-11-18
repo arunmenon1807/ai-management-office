@@ -4,6 +4,8 @@ An advisory, **read-only-by-default** multi-agent management office for a small 
 
 You name your company and describe it once; every agent then works from that context. A guard hook keeps the AI from sending, filing, paying, deploying, pushing or deleting: it drafts and recommends, **you** decide and act. An optional local web app (Next.js) gives a dashboard, chat, tasks, approvals and reports.
 
+![A 10-second tour: the dashboard, the AI team, the live office view and one-click reports](docs/images/intro.gif)
+
 ![Dashboard of the local web app for a fictional company, showing counts of open tasks, approvals, risks and compliance items, and the six specialists at their desks](docs/images/dashboard.png)
 
 *The local web app, set up for the fictional "Acme Co". Your company's name appears in the sidebar and page title.*
