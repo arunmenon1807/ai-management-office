@@ -1,5 +1,7 @@
 # AI Management Office
 
+[![validate](https://github.com/arunmenon1807/ai-management-office/actions/workflows/validate.yml/badge.svg)](https://github.com/arunmenon1807/ai-management-office/actions/workflows/validate.yml)
+
 An advisory, **read-only-by-default** multi-agent management office for a small company, built on [Claude Code](https://claude.com/claude-code) native features. Your main Claude session acts as **Chief of Staff** and delegates to six specialists (Company Secretary, Chartered Accountant, CFO, CTO, Product Manager, Marketing & Growth) using seven standard workflows (`/daily-brief`, `/weekly-review`, `/monthly-business-review`, `/compliance-check`, `/financial-review`, `/technology-review`, `/decision-review`).
 
 You name your company and describe it once; every agent then works from that context. A guard hook keeps the AI from sending, filing, paying, deploying, pushing or deleting: it drafts and recommends, **you** decide and act. An optional local web app (Next.js) gives a dashboard, chat, tasks, approvals and reports.
