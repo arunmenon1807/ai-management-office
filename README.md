@@ -26,6 +26,23 @@ On macOS you can instead double-click `apps/launcher/start.command` (it builds o
 
 **How easy is it to use?** Setup is those three commands. After that there is nothing to configure to look around: the dashboard, AI Team, Office, Tasks, Approvals and Documents pages work immediately and show only real, recorded information (empty means nothing is recorded yet). To get answers, click **AI Team → Start conversation** on any specialist, or **Reports → Generate** to run a workflow such as the daily brief. Chat and reports use your Claude Code sign-in; see [docs/ai-auth-and-cost.md](docs/ai-auth-and-cost.md) for how usage is billed. A full tour is in [docs/app-guide.md](docs/app-guide.md).
 
+## Optional: connect your tools (Google Drive, Gmail and more)
+
+Everything above works with **no connectors**. Connect tools only when you want agents to read your real documents, mail or infrastructure. The agents never send, pay, deploy or delete: connectors are **read-only**, with two narrow exceptions you control (Gmail drafts, and new Drive files that you approve one click at a time).
+
+**Connect Google Drive or Gmail**
+1. Open [claude.ai/settings/connectors](https://claude.ai/settings/connectors), choose Google Drive (and/or Gmail) and sign in with your own Google account.
+2. In the web app open **Settings → Connectors**. The connector should appear with a health status. Use **Authenticate** if it asks you to sign in again.
+3. Note the folder IDs you want agents to use in `records/sources.md` (locators only, never contents). Sensitive files stay in Drive and are referenced by ID.
+
+**Connect more connectors or plugins** (Vercel, Railway, GitHub, Cloudflare, Sentry, anything with an MCP server)
+1. **Add it.** For a hosted connector use claude.ai/settings/connectors, or add an `https` MCP server in **Settings → Connectors → Add**. For stdio or API-key servers, or for Claude Code plugins, use `/mcp` and `/plugin` inside Claude Code or `claude mcp add` in a terminal. Authenticate with the provider's own sign-in, never by pasting keys into chat or files.
+2. **Let the agents use it, read tools only.** Add the connector's read tool names (for example `mcp__vercel__list_projects`) to the `tools:` line of the agents that need it in `.claude/agents/`. The web app pre-approves exactly the read tools listed there.
+3. **Check the guard.** For an unknown connector the guard allows tool names that start with a read verb (`get`, `list`, `search`, `read`, `describe`, `fetch`, `query`, `status`) and denies everything else, plus anything that exposes secrets (token, env, variables, API key). Review the connector's tools yourself, because a read-named tool with side effects would pass (see `docs/permission-model.md`).
+4. **Record it.** Add a row to `docs/integration-inventory.md`, then run `python3 tests/validate.py` and add an allow case and a deny case for the new tools.
+
+Details: [docs/integration-inventory.md](docs/integration-inventory.md), [docs/app-guide.md](docs/app-guide.md) (Connectors and Google Drive sections).
+
 ## Quick start (Claude Code only, no web UI)
 
 ```bash
