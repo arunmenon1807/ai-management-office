@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest an improvement, a new integration or a jurisdiction pack
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The project stays **advisory and read-only by default**. Proposals that need write access (sending, paying, filing, deploying) must keep a human approval step. Never include real company data.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type
+      options:
+        - Jurisdiction pack (country-specific CS / CA agents, identifiers, facts)
+        - New read-only integration
+        - New agent or workflow (skill)
+        - Web app improvement
+        - Docs
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: For an integration, list the read tools you expect agents to use and any write tools the guard must keep denied.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to open a pull request for this

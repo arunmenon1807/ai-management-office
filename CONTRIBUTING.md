@@ -8,5 +8,8 @@ Thanks for helping. Most valuable right now: **jurisdiction packs** (see `docs/l
 - Edit `templates/`, not the rendered `CLAUDE.md` / `company/facts/*` / `records/sources.md`. Re-render the neutral text with `python3 scripts/init_company.py --defaults --yes`.
 - Before opening a PR: `python3 tests/validate.py` (0 failures) and, for web changes, `cd apps/web && npm install && npm test && npx tsc --noEmit`.
 
+## Reporting bugs and requesting features
+Use the issue templates (New issue → Bug report or Feature request). They ask for fictional examples only: never paste real company data. Record user-visible changes in `CHANGELOG.md` under **Unreleased**.
+
 ## Reporting security issues
-Open a private security advisory on the repository rather than a public issue. Include the command or tool call the guard should have blocked.
+Use the repository's private security advisory (linked on the New issue page) rather than a public issue. Include the command or tool call the guard should have blocked.

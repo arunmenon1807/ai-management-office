@@ -1,0 +1,53 @@
+name: Bug report
+description: Something is broken or behaves differently from the docs
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Do not paste real company data, secrets, tokens, tax or bank identifiers, or contents of your `company/` folders.** Use fictional values.
+        Found a way to make the guard allow something it should block? Please use a private security advisory instead (see the link on the New issue page).
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Setup wizard (scripts/init_company.py)
+        - Guard hook or guard policy
+        - Agents or skills
+        - Records tooling (scripts/records.py)
+        - Web app
+        - Launcher (macOS)
+        - Docs
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. python3 scripts/init_company.py --name "Acme Co" ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, Python version (`python3 --version`), Node version (`node -v`), Claude Code version (`claude --version`).
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output of `python3 tests/validate.py` (last lines) and any error text
+      description: Redact anything that identifies your company.
+      render: text
